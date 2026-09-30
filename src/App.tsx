@@ -1,4 +1,5 @@
 import './App.css'
+import { Routes, Route, Link, NavLink } from "react-router-dom";
 import { useLeague } from './state/LeagueContext';
 import { LeagueSetup } from './components/LeagueSetup';
 import { FixtureList } from './components/FixtureList';
@@ -11,8 +12,22 @@ function App() {
 
   return leagueExists ? (
     <>
-      <StandingsTable />
-      <FixtureList />
+        <nav className="tab-list">
+          <NavLink className="tab-list-item" to="/">
+            Table
+          </NavLink>
+          <NavLink className="tab-list-item" to="/matches">
+            Matches
+          </NavLink>
+        </nav>
+      <Routes>
+        <Route
+          path="/"
+          element={<StandingsTable />}></Route>
+          <Route
+          path="/matches"
+          element={<FixtureList />}></Route>
+      </Routes>
     </>
   ) : (
     <LeagueSetup />

@@ -23,6 +23,16 @@ export function leagueReducer(state: LeagueState, action: Action): LeagueState {
             ),
         };
     }
+    case 'RESET_SCORE': {
+        return {
+            ...state,
+            fixtures: state.fixtures.map((f) =>
+            f.id === action.fixtureId
+                ? { ...f, status: { kind: 'scheduled' } }
+                : f
+            ),
+        };
+    }
     case 'POSTPONE_FIXTURE': {
               return {
             ...state,

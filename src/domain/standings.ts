@@ -19,8 +19,8 @@ export function computeStandings(teams: Team[], fixtures: Fixture[]): StandingsR
     });
 
     for (const fixture of fixtures) {
-        if (fixture.status.kind !== 'played') continue;   // narrows fixture.status
-        const { score } = fixture.status;                 // now allowed
+        if (fixture.status.kind !== 'played') continue; 
+        const { score } = fixture.status; 
 
         const home = rows.get(fixture.homeTeamId);
         const away = rows.get(fixture.awayTeamId);
@@ -62,22 +62,3 @@ export function computeStandings(teams: Team[], fixtures: Fixture[]): StandingsR
     });
 }
 
-// export interface Fixture {
-//   id: FixtureId;
-//   round: number;
-//   homeTeamId: TeamId;
-//   awayTeamId: TeamId;
-//   status: FixtureStatus;
-// }
-
-// export interface StandingsRow {
-//   teamId: TeamId;
-//   played: number;
-//   won: number;
-//   drawn: number;
-//   lost: number;
-//   goalsFor: number;
-//   goalsAgainst: number;
-//   goalDifference: number;
-//   points: number;
-// }

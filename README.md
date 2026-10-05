@@ -3,13 +3,13 @@
 A small league scheduling and standings app, built to practise strict TypeScript in React after years of JavaScript. Create a league of 4–8 teams, generate a round-robin fixture list, record results, and watch a live standings table update.
 
 <!-- Screenshot: setup screen -->
-![Setting up a league](./assets/Screenshots/setup.png)
+![Setting up a league](/assets/Screenshots/setup.png)
 
 <!-- Screenshot: fixtures / match cards -->
-![Fixture list with scores](./assets/Screenshots/matches.png)
+![Fixture list with scores](/assets/Screenshots/matches.png)
 
 <!-- Screenshot: standings table -->
-![Standings table](./assets/Screenshots/table.png)
+![Standings table](/assets/Screenshots/table.png)
 
 ## Why this project
 

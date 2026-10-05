@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import { useLeague } from '../state/LeagueContext';
 import type { Fixture } from '../domain/types';
 

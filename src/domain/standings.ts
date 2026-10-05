@@ -1,4 +1,3 @@
-import { afterEach } from 'vitest';
 import type { Team, TeamId,Fixture, StandingsRow } from './types';
 
 const points = {

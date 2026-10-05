@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route, Link, NavLink } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 import { useLeague } from './state/LeagueContext';
 import { LeagueSetup } from './components/LeagueSetup';
 import { FixtureList } from './components/FixtureList';

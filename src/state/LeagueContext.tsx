@@ -1,6 +1,23 @@
-import { createContext, useContext, useReducer, type ReactNode, type Dispatch } from 'react';
+import { createContext, useContext, useReducer, useEffect, type ReactNode, type Dispatch } from 'react';
 import { leagueReducer } from './reducer';
 import { initialState, type LeagueState, type Action } from './actions';
+import { isLeagueState } from './validation';
+
+const STORAGE_KEY = 'league-manager:state';
+
+function loadState(): LeagueState {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return initialState;
+
+    const parsed: unknown = JSON.parse(raw);
+    if (!isLeagueState(parsed)) return initialState; // malformed data: start fresh
+
+    return parsed;
+  } catch {
+    return initialState;
+  }
+}
 
 interface LeagueContextValue {
   state: LeagueState;
@@ -10,7 +27,11 @@ interface LeagueContextValue {
 const LeagueContext = createContext<LeagueContextValue | undefined>(undefined);
 
 export function LeagueProvider({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(leagueReducer, initialState);
+  const [state, dispatch] = useReducer(leagueReducer, undefined, loadState);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }, [state]);
 
   return (
     <LeagueContext.Provider value={{ state, dispatch }}>
@@ -26,3 +47,9 @@ export function useLeague(): LeagueContextValue {
   }
   return context;
 }
+
+interface LeagueContextValue {
+  state: LeagueState;
+  dispatch: Dispatch<Action>;
+}
+

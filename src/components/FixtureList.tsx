@@ -103,7 +103,11 @@ function FixtureRow({ fixture, teamName, }: { fixture: Fixture; teamName: (id: s
     <form className={`match-card `} onSubmit={handleSubmit}>
       <div className="match-card-stage">
         {`Round ${fixture.round + 1}`}
-        <button type="submit" className='match-card-save'>🖫</button>
+        <div style={{display:"flex", gap:"6px"}}>
+          {fixture.status.kind === 'played' && <button className='match-card-reset' onClick={() => {dispatch({ type: 'RESET_SCORE', fixtureId: fixture.id }); setEditFixture(false)}}>↻</button>}
+          <button type="submit" className='match-card-save'>🖫</button>
+          
+        </div>
       </div>
       <div className="match-card-details">
         <div className="match-card-teams">
@@ -120,7 +124,7 @@ function FixtureRow({ fixture, teamName, }: { fixture: Fixture; teamName: (id: s
                 type="number"
                 placeholder='0'
                 min={0}
-                value={homeScore}
+                value={fixture.status.kind === 'played' ? fixture.status.score.home : homeScore}
                 onChange={(e) => setHomeScore(e.target.value)}
               />
             </div>
@@ -138,7 +142,7 @@ function FixtureRow({ fixture, teamName, }: { fixture: Fixture; teamName: (id: s
                 type="number"
                 placeholder='0'
                 min={0}
-                value={awayScore}
+                value={fixture.status.kind === 'played' ? fixture.status.score.away : awayScore}
                 onChange={(e) => setAwayScore(e.target.value)}
               />
             </div>
